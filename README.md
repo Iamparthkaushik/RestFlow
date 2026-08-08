@@ -42,7 +42,7 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ### Production / Vercel (`.env.production`)
 Create a `.env.production` file for testing production builds locally (via `pnpm build`), or add these variables directly in your **Vercel Project Settings**.
 ```env
-NEXT_PUBLIC_APP_URL="https://restflow.vercel.app"
+NEXT_PUBLIC_APP_URL="https://restflows.vercel.app"
 # Add your production MongoDB, Auth Secret, Google Client ID, etc. here.
 ```
 
