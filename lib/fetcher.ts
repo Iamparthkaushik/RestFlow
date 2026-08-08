@@ -1,4 +1,5 @@
 import { SignJWT } from "jose"
+import { getBaseUrl } from "@/lib/utils"
 
 interface FetcherOptions extends RequestInit {
   baseUrl?: string
@@ -88,7 +89,7 @@ export const internalApiFetcher = async <T>({
   return fetcher<T>(endpoint, {
     ...options,
     headers,
-    baseUrl: process.env.NEXT_PUBLIC_APP_URL
+    baseUrl: getBaseUrl()
   })
 }
 
@@ -106,7 +107,7 @@ export const rawInternalApiFetcher = async ({
     ...authHeaders
   }
 
-  return fetch(`${process.env.NEXT_PUBLIC_APP_URL}/${endpoint}`, {
+  return fetch(`${getBaseUrl()}/${endpoint}`, {
     ...options,
     headers
   })

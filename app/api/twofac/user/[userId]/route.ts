@@ -6,14 +6,15 @@ import { TwoFactorConfirmation } from "@/lib/database/models/auth.model"
 import { ITwoFactorConfirmation } from "@/lib/database/types"
 
 // GET /api/twofac/user/:userId
-export async function GET(_: NextRequest, { params }: { params: { userId: string } }) {
+export async function GET(_: NextRequest, { params }: { params: Promise<{ userId: string }> }) {
   const authError = await authorizeInternalRequest(_)
   if (authError) return authError
   
   await connectDB()
   
   try {
-    const confirmation = await TwoFactorConfirmation.findOne({ userId: params.userId })
+    const { userId } = await params
+    const confirmation = await TwoFactorConfirmation.findOne({ userId })
     if (!confirmation) return NextResponse.json(null)
     // console.log({confirmation})
     

@@ -25,7 +25,7 @@ export default async function AppLayout({
   params
 }: {
   children: React.ReactNode
-  params: { locale: Locale }
+  params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
   if (!routing.locales.includes(locale as Locale)) {

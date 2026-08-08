@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server"
 import nodemailer from "nodemailer"
+import { getBaseUrl } from "@/lib/utils"
 
-const baseURL = process.env.NEXT_PUBLIC_APP_URL
 const emailUser = process.env.EMAIL_USER
 const emailPass = process.env.EMAIL_PASSWORD
 
@@ -15,7 +15,7 @@ export const sendVerificationEmail = async (
   token: string
 ) => {
   const tEmail = await getTranslations("Email.verification")
-  const confirmLink = `${baseURL}/new-verification?token=${token}`
+  const confirmLink = `${getBaseUrl()}/new-verification?token=${token}`
 
   const mailOptions = {
     from: emailUser,
@@ -48,7 +48,7 @@ export const sendPasswordResetEmail = async (
   token: string
 ) => {
   const tEmail = await getTranslations("Email.reset")
-  const resetLink = `${baseURL}/new-password?token=${token}`
+  const resetLink = `${getBaseUrl()}/new-password?token=${token}`
 
   const mailOptions = {
     from: emailUser,

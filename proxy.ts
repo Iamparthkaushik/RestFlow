@@ -11,13 +11,13 @@ const baseMiddleware = chain(withAuthMiddleware, withIntlMiddleware)
 // Use NextAuth to generate auth middleware wrapper
 const { auth: withAuthWrapper } = NextAuth(authConfig)
 
-const middleware = withAuthWrapper(async (req: NextRequest) => {
+const proxy = withAuthWrapper(async (req: NextRequest) => {
   const res = NextResponse.next()
   const event = {} as NextFetchEvent
   return await baseMiddleware(req, event, res)
 })
 
-export default middleware
+export default proxy
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|images|favicon.ico).*)"]

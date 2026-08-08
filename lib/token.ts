@@ -17,7 +17,7 @@ export const isTokenError = (res: IPayload | IError): res is IError => {
 }
 
 export const generateToken = async (payload: { email: string }, expiresIn: string = "1h") => {
-  return jwt.sign(payload, process.env.TOKEN_SECRET!,{ expiresIn }) // jwt.io
+  return jwt.sign(payload, process.env.TOKEN_SECRET!, { expiresIn } as jwt.SignOptions) // jwt.io
 }
 
 export const verifyToken = async (token: string): Promise<IPayload | IError> => {

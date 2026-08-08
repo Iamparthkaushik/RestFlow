@@ -6,14 +6,15 @@ import { User } from "@/lib/database/models/auth.model"
 import { IUser } from "@/lib/database/types"
 
 // GET /api/user/:id
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const authError = await authorizeInternalRequest(req)
   if (authError) return authError
 
   await connectDB()
   
   try {
-    const user = await User.findById(params.id)
+    const { id } = await params
+    const user = await User.findById(id)
     if (!user) return NextResponse.json(null)
     
     return NextResponse.json({

@@ -3,10 +3,7 @@ const withNextIntl = createNextIntlPlugin()
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  experimental: {
-    esmExternals: "loose",
-    serverComponentsExternalPackages: ["mongoose"]
-  }
+  serverExternalPackages: ["mongoose"]
 }
 
 export default withNextIntl(nextConfig)

@@ -1,8 +1,8 @@
-import { Model, FilterQuery, UpdateQuery } from "mongoose"
+import mongoose, { Model, UpdateQuery } from "mongoose"
 
 interface UpdateFieldOptions<T> {
   model: Model<T>
-  filter: FilterQuery<T>
+  filter: Record<string, any>
   field: keyof T
   value: T[keyof T]
 }

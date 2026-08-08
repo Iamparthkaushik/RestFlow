@@ -24,44 +24,26 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Run the development server:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## ⚙️ Environment Variables
-Create a .env file in the project root and include the following:
+This project uses separate environment files for local development and production.
 
+### Local Development (`.env.development`)
+Create a `.env.development` file in the project root. Next.js automatically uses this when you run `pnpm dev`. It should contain local credentials and use the local app URL:
 ```env
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
+# Add your local MongoDB, Auth Secret, Google Client ID, etc. here.
+```
 
-AUTH_SECRET="YOUR_AUTH_SECRET"
-INTERNAL_API_KEY="YOUR_INTERNAL_API_KEY"
-INTERNAL_API_SECRET="YOUR_INTERNAL_API_SECRET"
-NEXT_PUBLIC_INTERNAL_API_SECRET="YOUR_NEXT_PUBLIC_INTERNAL_API_SECRET"
-
-MONGODB_URI="YOUR_MONGODB_URI"
-
-GOOGLE_CLIENT_ID="YOUR_GOOGLE_CLIENT_ID"
-GOOGLE_CLIENT_SECRET="YOUR_GOOGLE_CLIENT_SECRET"
-
-TOKEN_SECRET="YOUR_TOKEN_SECRET"
-
-# Resend
-RESEND_API_KEY="YOUR_RESEND_API_KEY"
-RESEND_EMAIL_URL="YOUR_RESEND_EMAIL_URL"
-
-# OR
-
-# Nodemailer
-EMAIL_USER="YOUR_EMAIL_USER"
-EMAIL_PASSWORD="YOUR_EMAIL_PASSWORD"
+### Production / Vercel (`.env.production`)
+Create a `.env.production` file for testing production builds locally (via `pnpm build`), or add these variables directly in your **Vercel Project Settings**.
+```env
+NEXT_PUBLIC_APP_URL="https://restflow.vercel.app"
+# Add your production MongoDB, Auth Secret, Google Client ID, etc. here.
 ```
 
 ## 🔐 Getting Google OAuth Credentials
