@@ -12,7 +12,7 @@ import {
   getSignInFormSchema
 } from "@/lib/validations/auth"
 import { generateToken, generateCode } from "@/lib/token"
-import { sendVerificationEmail, sendTwoFactorTokenEmail } from "@/lib/mail/nodemailer"
+import { sendVerificationEmail, sendTwoFactorTokenEmail } from "@/lib/mail/resend"
 
 export const signInWithCredentials = async (
   values: SignInFormValues,
