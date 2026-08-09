@@ -1,45 +1,30 @@
 export const mainNavLinks = [
-  { key: "newArrivals", url: "/" },
-  { key: "bestSellers", url: "/" },
-  { key: "sales", url: "/" },
-  { key: "categories", url: "/" }
+  { key: "dashboard", url: "/" },
+  { key: "schedule", url: "/schedule" },
+  { key: "workout", url: "/workout" }
 ]
 
 export const footerLinks = [
   {
-    sectionKey: "shop",
+    sectionKey: "app",
     links: [
-      { key: "newArrivals", url: "/" },
-      { key: "bestSellers", url: "/" },
-      { key: "sales", url: "/" },
-      { key: "categories", url: "/" }
+      { key: "dashboard", url: "/" },
+      { key: "schedule", url: "/schedule" },
+      { key: "workout", url: "/workout" }
     ],
   },
   {
     sectionKey: "support",
     links: [
-      { key: "customerService", url: "/" },
-      { key: "returns", url: "/" },
-      { key: "shipping", url: "/" },
-      { key: "sizeGuide", url: "/" }
-    ],
-  },
-  {
-    sectionKey: "company",
-    links: [
-      { key: "aboutUs", url: "/" },
-      { key: "careers", url: "/" },
-      { key: "blog", url: "/" },
-      { key: "affiliate", url: "/" }
+      { key: "help", url: "/" },
+      { key: "contact", url: "/" }
     ],
   },
   {
     sectionKey: "socials",
     links: [
       { key: "instagram", url: "/" },
-      { key: "twitter", url: "/" },
-      { key: "facebook", url: "/" },
-      { key: "pinterest", url: "/" }
+      { key: "twitter", url: "/" }
     ],
   }
 ]

@@ -36,6 +36,22 @@ export const userSchema = new mongoose.Schema({
   },
   emailPendingVerification: {
     type: String,
+  },
+  experienceLevel: {
+    type: String,
+    enum: ["beginner", "intermediate", "advanced"],
+    default: "beginner"
+  },
+  workCapacityFactor: {
+    type: Number,
+    default: 1.0
+  },
+  lastWorkCapacityUpdate: {
+    type: Date
+  },
+  weeklyWorkoutCount: {
+    type: Number,
+    default: 0
   }
 }, { timestamps: true })
 

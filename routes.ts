@@ -12,6 +12,6 @@ export const routes = {
   ],
   defaultSignInPage: "/signin",
   defaultErrorPage: "/error",
-  defaultLoginRedirect: "/settings",
+  defaultLoginRedirect: "/",
   defaultLogoutRedirect: "/signin"
 }
