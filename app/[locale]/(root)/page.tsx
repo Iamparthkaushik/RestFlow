@@ -9,7 +9,7 @@ export default async function Home() {
 
   if (!session) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] text-center px-4 pt-16">
+      <div className="flex flex-col items-center justify-center flex-1 w-full text-center px-4 py-12">
         <div className="max-w-3xl space-y-8">
           <div className="inline-block rounded-full bg-primary/10 px-3 py-1 text-sm text-primary dark:bg-primary/20">
             Smarter Workouts, Better Recovery

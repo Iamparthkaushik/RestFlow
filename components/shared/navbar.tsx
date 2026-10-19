@@ -8,8 +8,8 @@ import { ModeToggle } from "@/components/shared/button/mode-toggle"
 
 export const Navbar = () => {
   return (
-    <header className="w-full fixed z-10 top-0 bg-gray-100 dark:bg-gray-900 border-b border-gray-200">
-      <nav className="h-16 px-4 flex items-center">
+    <header className="w-full sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border shadow-xs">
+      <nav className="h-16 px-4 flex items-center max-w-7xl mx-auto w-full">
         <Link href="/">
           <SiAuth0 />
         </Link>

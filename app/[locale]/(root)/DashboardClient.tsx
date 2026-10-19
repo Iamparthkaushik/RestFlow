@@ -215,7 +215,7 @@ export default function DashboardClient({
   const editingDayObj = DAYS_ORDER.find((d) => d.day === editingDay) || DAYS_ORDER[0];
 
   return (
-    <div className="flex flex-col items-center min-h-[calc(100vh-4rem)] w-full max-w-2xl mx-auto px-4 pt-20 pb-28 space-y-10">
+    <div className="flex flex-col items-center w-full max-w-2xl mx-auto px-4 py-8 space-y-8 flex-1">
       {/* Top Welcome Header */}
       <div className="w-full text-center space-y-2">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">

@@ -10,7 +10,7 @@ export default async function WorkoutPage(props: {
   const schedule = await getUserSchedule(day);
 
   return (
-    <div className="min-h-screen pt-20 px-4 w-full max-w-lg mx-auto pb-24 flex flex-col">
+    <div className="w-full max-w-lg mx-auto px-4 py-8 flex flex-col flex-1">
       <WorkoutClient 
         initialSchedule={schedule?.exercises || []} 
         dayOfWeek={day}

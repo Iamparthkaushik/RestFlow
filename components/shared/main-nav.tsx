@@ -20,8 +20,8 @@ export const MainNav = () => {
         <AiOutlineMenu />
       </button>
       <div className={cn(
-        "absolute top-full left-0 w-full border bg-gray-100 dark:bg-gray-900",
-        "lg:border-none lg:static lg:flex lg:space-x-6",
+        "absolute top-full left-0 w-full border bg-background/95 backdrop-blur shadow-md border-border",
+        "lg:border-none lg:static lg:flex lg:space-x-6 lg:bg-transparent lg:shadow-none",
         menuOpen ? "block" : "hidden"
       )}>
         {

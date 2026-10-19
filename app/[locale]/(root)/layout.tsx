@@ -46,7 +46,7 @@ export default async function AppLayout({
   
   return (
     <html suppressHydrationWarning lang={locale}>
-      <body className={`${inter.className} overflow-x-hidden`}>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-background text-foreground antialiased overflow-x-hidden`}>
         <SessionProvider session={session}>
           <ThemeProvider
             attribute="class"
@@ -56,7 +56,7 @@ export default async function AppLayout({
           >
             <NextIntlClientProvider messages={messages}>
               <Navbar />
-              <main className="flex h-full flex-col items-center justify-center">
+              <main className="flex-1 flex flex-col w-full">
                 {children}
               </main>
               <Footer />

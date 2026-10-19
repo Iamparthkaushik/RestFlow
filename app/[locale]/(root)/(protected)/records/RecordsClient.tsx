@@ -77,7 +77,7 @@ export default function RecordsClient({ initialData }: { initialData: RecordsDat
   });
 
   return (
-    <div className="flex flex-col items-center min-h-[calc(100vh-4rem)] w-full max-w-2xl mx-auto px-4 pt-20 pb-28 space-y-8">
+    <div className="flex flex-col items-center w-full max-w-2xl mx-auto px-4 py-8 space-y-8 flex-1">
       {/* Top Nav & Breadcrumb */}
       <div className="w-full flex items-center justify-between">
         <Link

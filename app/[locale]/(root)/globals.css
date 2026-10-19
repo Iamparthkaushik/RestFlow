@@ -8,23 +8,23 @@
     box-sizing: border-box;
   }
 
-  html,
-  body,
-  :root {
-    height: 100%;
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-  }
-
   html {
+    min-height: 100%;
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
   }
 
   body {
+    min-height: 100%;
     overflow-x: hidden;
     touch-action: manipulation;
+  }
+
+  :root {
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   /* Prevent input zoom on iOS (font-size < 16px triggers zoom) */
