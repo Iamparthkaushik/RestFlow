@@ -10,6 +10,10 @@
       "signout": "登出",
       "settings": "帳戶設定",
       "links": {
+        "dashboard": "儀表板",
+        "schedule": "日程安排",
+        "workout": "鍛鍊",
+        "records": "紀錄",
         "newArrivals": "新品上市",
         "bestSellers": "熱銷商品",
         "sales": "特價專區",

@@ -20,7 +20,15 @@ type Exercise = {
   primaryMuscleGroup: string;
 };
 
-const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const DAYS = [
+  { index: 1, name: "Monday", short: "Mon" },
+  { index: 2, name: "Tuesday", short: "Tue" },
+  { index: 3, name: "Wednesday", short: "Wed" },
+  { index: 4, name: "Thursday", short: "Thu" },
+  { index: 5, name: "Friday", short: "Fri" },
+  { index: 6, name: "Saturday", short: "Sat" },
+  { index: 0, name: "Sunday", short: "Sun" },
+];
 
 export default function ScheduleClient({ allExercises }: { allExercises: Exercise[] }) {
   const [activeDay, setActiveDay] = useState(new Date().getDay());
@@ -28,6 +36,16 @@ export default function ScheduleClient({ allExercises }: { allExercises: Exercis
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const dayParam = params.get("day");
+      if (dayParam !== null && !isNaN(Number(dayParam))) {
+        setActiveDay(Number(dayParam));
+      }
+    }
+  }, []);
 
   useEffect(() => {
     loadSchedule(activeDay);
@@ -70,28 +88,33 @@ export default function ScheduleClient({ allExercises }: { allExercises: Exercis
     }
   };
 
+  const currentDayObj = DAYS.find(d => d.index === activeDay) || DAYS[0];
+
   return (
     <div className="space-y-6">
-      {/* Day Selector */}
+      {/* Day Selector - Monday through Sunday */}
       <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide">
-        {DAYS.map((day, i) => (
+        {DAYS.map((d) => (
           <button
-            key={day}
-            onClick={() => setActiveDay(i)}
-            className={`px-4 py-2 rounded-full whitespace-nowrap transition-all ${
-              activeDay === i 
+            key={d.name}
+            onClick={() => setActiveDay(d.index)}
+            className={`px-4 py-2 rounded-full whitespace-nowrap text-sm transition-all ${
+              activeDay === d.index 
                 ? "bg-primary text-primary-foreground font-semibold shadow-md" 
                 : "bg-muted text-muted-foreground hover:bg-muted/80"
             }`}
           >
-            {day.substring(0, 3)}
+            {d.short}
           </button>
         ))}
       </div>
 
       <div className="bg-card border rounded-3xl p-6 shadow-sm min-h-[400px] flex flex-col">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold">{DAYS[activeDay]}</h2>
+          <div>
+            <h2 className="text-xl font-bold">{currentDayObj.name}</h2>
+            <p className="text-xs text-muted-foreground mt-0.5">Repeats every {currentDayObj.name}. 1 session per day.</p>
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="rounded-full">

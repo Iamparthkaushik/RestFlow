@@ -12,7 +12,8 @@
       "links": {
         "dashboard": "Dashboard",
         "schedule": "Schedule",
-        "workout": "Workout"
+        "workout": "Workout",
+        "records": "Records"
       }
     }
   },
@@ -27,6 +28,7 @@
         "dashboard": "Dashboard",
         "schedule": "Schedule",
         "workout": "Workout",
+        "records": "Records",
         "help": "Help Center",
         "contact": "Contact Us",
         "instagram": "Instagram",

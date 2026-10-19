@@ -17,6 +17,19 @@ export const sessionSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  status: {
+    type: String,
+    enum: ["in-progress", "completed", "cancelled"],
+    default: "in-progress"
+  },
+  dayOfWeek: {
+    type: Number,
+    min: 0,
+    max: 6
+  },
+  dateString: {
+    type: String
+  },
   sets: [{
     exerciseId: {
       type: mongoose.Schema.Types.ObjectId,

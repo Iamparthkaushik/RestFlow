@@ -1,7 +1,8 @@
 export const mainNavLinks = [
   { key: "dashboard", url: "/" },
   { key: "schedule", url: "/schedule" },
-  { key: "workout", url: "/workout" }
+  { key: "workout", url: "/workout" },
+  { key: "records", url: "/records" }
 ]
 
 export const footerLinks = [
@@ -10,7 +11,8 @@ export const footerLinks = [
     links: [
       { key: "dashboard", url: "/" },
       { key: "schedule", url: "/schedule" },
-      { key: "workout", url: "/workout" }
+      { key: "workout", url: "/workout" },
+      { key: "records", url: "/records" }
     ],
   },
   {

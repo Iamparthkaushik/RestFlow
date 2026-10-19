@@ -1,7 +1,8 @@
 import { auth } from "@/auth"
 import { Link } from "@/i18n/routing"
 import { ArrowRight, Activity, Clock, Zap } from "lucide-react"
-import { hasAnySchedule } from "@/lib/actions/workout"
+import { getUserDashboardData } from "@/lib/actions/workout"
+import DashboardClient from "./DashboardClient"
 
 export default async function Home() {
   const session = await auth()
@@ -62,55 +63,16 @@ export default async function Home() {
     )
   }
 
-  const hasSchedule = await hasAnySchedule();
+  const dashboardData = await getUserDashboardData();
+
+  if (!dashboardData) {
+    return null;
+  }
 
   return (
-    <div className="flex flex-col items-center min-h-[calc(100vh-4rem)] w-full max-w-md mx-auto px-4 pt-24 space-y-8">
-      <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Welcome, {session.user?.name || "Athlete"}</h1>
-        <p className="text-muted-foreground">Ready to crush your workout today?</p>
-      </div>
-
-      {!hasSchedule ? (
-        <div className="w-full p-8 rounded-3xl border bg-card text-card-foreground shadow-sm flex flex-col items-center text-center space-y-4">
-          <div className="p-4 rounded-full bg-primary/10 text-primary">
-            <Activity className="h-8 w-8" />
-          </div>
-          <h2 className="text-xl font-semibold">No Schedule Set</h2>
-          <p className="text-sm text-muted-foreground">
-            You haven't scheduled any exercises yet. Set up your weekly routine to get started.
-          </p>
-          <Link 
-            href="/schedule" 
-            className="w-full inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 mt-4"
-          >
-            Create Schedule
-          </Link>
-        </div>
-      ) : (
-        <div className="w-full space-y-4">
-          <div className="p-6 rounded-3xl border bg-card text-card-foreground shadow-sm flex flex-col space-y-4">
-            <h2 className="text-lg font-semibold">Today's Plan</h2>
-            <div className="space-y-2">
-              {/* Placeholder for today's exercises */}
-              <div className="flex items-center justify-between p-3 rounded-xl bg-muted/50">
-                <span className="font-medium text-sm">Pull-ups</span>
-                <span className="text-xs text-muted-foreground">4 sets</span>
-              </div>
-              <div className="flex items-center justify-between p-3 rounded-xl bg-muted/50">
-                <span className="font-medium text-sm">Dips</span>
-                <span className="text-xs text-muted-foreground">4 sets</span>
-              </div>
-            </div>
-            <Link 
-              href="/workout" 
-              className="w-full inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
-            >
-              Start Workout <Zap className="ml-2 h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
-  )
+    <DashboardClient 
+      initialData={dashboardData} 
+      userName={session.user?.name || "Athlete"} 
+    />
+  );
 }

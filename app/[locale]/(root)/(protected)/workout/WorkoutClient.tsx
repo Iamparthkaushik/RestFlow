@@ -4,10 +4,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Activity, Zap, Check, Play, Pause, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { logSetAndGetRest, completeRest } from "@/lib/actions/workout";
+import { logSetAndGetRest, completeRest, completeWorkoutSession } from "@/lib/actions/workout";
 
-// A mock version for MVP. Real app would call Server Actions and save to DB.
-export default function WorkoutClient({ initialSchedule }: { initialSchedule: any[] }) {
+export default function WorkoutClient({ 
+  initialSchedule, 
+  dayOfWeek 
+}: { 
+  initialSchedule: any[]; 
+  dayOfWeek?: number;
+}) {
   const [phase, setPhase] = useState<"ready" | "warmup" | "workout" | "rest" | "done">("ready");
   const [warmupTime, setWarmupTime] = useState(600); // 10 minutes
   const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -101,13 +106,31 @@ export default function WorkoutClient({ initialSchedule }: { initialSchedule: an
     }
   };
 
+  const [isFinishing, setIsFinishing] = useState(false);
+
+  const handleFinishWorkout = async () => {
+    setIsFinishing(true);
+    try {
+      await completeWorkoutSession({
+        sessionId,
+        dayOfWeek: typeof dayOfWeek === "number" ? dayOfWeek : new Date().getDay(),
+        exerciseIds: exercises.map((e: any) => e._id),
+      });
+    } catch (err) {
+      console.error("Failed to complete workout:", err);
+    } finally {
+      setIsFinishing(false);
+      setPhase("done");
+    }
+  };
+
   const nextExercise = () => {
     if (currentExIndex < exercises.length - 1) {
       setCurrentExIndex(prev => prev + 1);
       setPhase("workout");
       setIsTimerRunning(false);
     } else {
-      setPhase("done");
+      handleFinishWorkout();
     }
   };
 
@@ -263,17 +286,36 @@ export default function WorkoutClient({ initialSchedule }: { initialSchedule: an
               <Button 
                 className="w-full rounded-full h-14 shadow-lg text-lg"
                 onClick={logSet}
-                disabled={!reps || isLogging}
+                disabled={!reps || isLogging || isFinishing}
               >
                 {isLogging ? <Loader2 className="h-6 w-6 animate-spin" /> : "Log Set & Rest"}
               </Button>
-              <Button 
-                variant="ghost"
-                className="w-full rounded-full h-14"
-                onClick={nextExercise}
-              >
-                Finish Exercise <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
+              <div className="flex gap-2">
+                <Button 
+                  variant="ghost"
+                  className="flex-1 rounded-full h-14"
+                  onClick={nextExercise}
+                  disabled={isFinishing}
+                >
+                  {isFinishing ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : currentExIndex < exercises.length - 1 ? (
+                    <>Next Exercise <ArrowRight className="h-4 w-4 ml-2" /></>
+                  ) : (
+                    <>Finish Workout 🎉</>
+                  )}
+                </Button>
+                {currentExIndex < exercises.length - 1 && (
+                  <Button
+                    variant="outline"
+                    className="rounded-full h-14 px-5 text-xs text-muted-foreground hover:text-foreground"
+                    onClick={handleFinishWorkout}
+                    disabled={isFinishing}
+                  >
+                    Finish Early
+                  </Button>
+                )}
+              </div>
             </div>
           </motion.div>
         )}
@@ -348,20 +390,32 @@ export default function WorkoutClient({ initialSchedule }: { initialSchedule: an
             animate={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center justify-center text-center space-y-8"
           >
-            <div className="p-6 rounded-full bg-green-500/10 text-green-500">
+            <div className="p-6 rounded-full bg-emerald-500/10 text-emerald-500">
               <Check className="h-12 w-12" />
             </div>
             <div className="space-y-2">
               <h2 className="text-3xl font-extrabold">Workout Complete!</h2>
-              <p className="text-muted-foreground">Great job today. Your RestFlow metrics have been recorded.</p>
+              <p className="text-muted-foreground">
+                Great job today! Your workout has been saved into Records and completed for the day.
+              </p>
             </div>
-            <Button 
-              size="lg" 
-              className="rounded-full px-12 h-14 text-lg shadow-xl"
-              onClick={() => window.location.href = "/"}
-            >
-              Back to Dashboard
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 w-full">
+              <Button 
+                size="lg" 
+                className="flex-1 rounded-full h-14 text-base shadow-xl"
+                onClick={() => window.location.href = "/"}
+              >
+                Back to Dashboard
+              </Button>
+              <Button 
+                variant="outline"
+                size="lg" 
+                className="flex-1 rounded-full h-14 text-base"
+                onClick={() => window.location.href = "/records"}
+              >
+                View in Records
+              </Button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
