@@ -16,8 +16,15 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Nextjs fullstack Authentication",
-  description: "Sign-Up and Sign-In with Nextjs",
+  title: "RestFlow — Smart Workout Recovery",
+  description: "RestFlow uses an advanced dynamic algorithm to optimize your rest between sets.",
+}
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default async function AppLayout({
@@ -39,7 +46,7 @@ export default async function AppLayout({
   
   return (
     <html suppressHydrationWarning lang={locale}>
-      <body className={inter.className}>
+      <body className={`${inter.className} overflow-x-hidden`}>
         <SessionProvider session={session}>
           <ThemeProvider
             attribute="class"

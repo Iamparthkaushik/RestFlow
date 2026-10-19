@@ -82,7 +82,7 @@ export const SettingsForm = () => {
   }
 
   return (
-    <Card className="w-[350px]">
+    <Card className="w-full max-w-[350px] mx-auto">
       <CardHeader>
         <p className="text-2xl font-semibold text-center">
           {tUi("header")}
@@ -213,7 +213,7 @@ export const SettingsForm = () => {
 
 SettingsForm.Skeleton = function SkeletonSettingsForm() {
   return (
-    <Card className="w-[350px]">
+    <Card className="w-full max-w-[350px] mx-auto">
       <CardHeader>
         <Skeleton className="h-10 w-1/2 mx-auto my-2" />
       </CardHeader>

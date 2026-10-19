@@ -163,7 +163,7 @@ export default function WorkoutClient({ initialSchedule }: { initialSchedule: an
             className="flex flex-col items-center justify-center w-full space-y-8"
           >
             <h2 className="text-2xl font-bold tracking-tight text-muted-foreground uppercase">Warmup</h2>
-            <div className="text-8xl font-black tabular-nums tracking-tighter">
+            <div className="text-6xl sm:text-8xl font-black tabular-nums tracking-tighter">
               {formatTime(warmupTime)}
             </div>
             <div className="flex space-x-4">
@@ -205,7 +205,7 @@ export default function WorkoutClient({ initialSchedule }: { initialSchedule: an
               <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">
                 Exercise {currentExIndex + 1} of {exercises.length}
               </p>
-              <h2 className="text-4xl font-black leading-tight">{activeExercise?.name}</h2>
+              <h2 className="text-3xl sm:text-4xl font-black leading-tight">{activeExercise?.name}</h2>
             </div>
             
             <div className="bg-card border rounded-3xl p-6 shadow-sm space-y-6">
@@ -292,8 +292,8 @@ export default function WorkoutClient({ initialSchedule }: { initialSchedule: an
               <p className="text-sm text-muted-foreground">Optimal recovery time computed.</p>
             </div>
             
-            <div className="relative flex items-center justify-center w-64 h-64">
-              <svg className="absolute inset-0 w-full h-full transform -rotate-90">
+            <div className="relative flex items-center justify-center w-48 h-48 sm:w-64 sm:h-64">
+              <svg className="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 256 256">
                 <circle cx="128" cy="128" r="120" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-muted" />
                 <motion.circle 
                   cx="128" 
@@ -309,7 +309,7 @@ export default function WorkoutClient({ initialSchedule }: { initialSchedule: an
                   transition={{ duration: 1, ease: "linear" }}
                 />
               </svg>
-              <div className="text-6xl font-black tabular-nums tracking-tighter absolute">
+              <div className="text-5xl sm:text-6xl font-black tabular-nums tracking-tighter absolute">
                 {formatTime(restTime)}
               </div>
             </div>
